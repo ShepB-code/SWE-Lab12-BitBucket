@@ -29,12 +29,11 @@ public class Timer {
 	}
 	
 	public static long timeMe(long timeToWait) throws TimerException {
-		Long timeNow = null;
+		Long timeNow = System.currentTimeMillis();;
 		try {
 		  if (timeToWait < 0) {
 			  throw new TimerException("Cannot be less than zero");
 		  }
-	      timeNow = System.currentTimeMillis();
 		  method(timeToWait);
 			
 		} catch (InterruptedException e) {
@@ -45,5 +44,14 @@ public class Timer {
 			logger.info("* should take: "+ timeToWait);
 		}
 		return timeNow;
+	}
+
+	public static void main(String[] args) {
+		try {
+			Long time = Timer.timeMe(2);
+		} catch (TimerException e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 }
